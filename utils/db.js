@@ -21,4 +21,21 @@ class DBclient {
       }
     });
   }
+  isAlive() {
+    return !!this.client; // this.client ? true : false;
+  }
+
+  // Returns the number of documents in the collection users
+  async nbUsers() {
+    const numDocs = await this.client.collection('users').estimatedDocumentCount({});
+    return numDocs;
+  }
+
+  // returns the number of documents in the collection files
+  async nbFiles() {
+    const numDocs = await this.client.collection('files').estimatedDocumentCount({});
+    return numDocs;
+  }
 }
+const dbClient = new DBclient();
+module.exports = dbClient;
